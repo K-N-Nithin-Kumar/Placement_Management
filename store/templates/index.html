@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load cart %}
+{% load custom_filter %}
+<!-- body -->
+<style>
+    #records
+    {
+        width:50em;
+    }
+    #button
+    {
+       margin-top:40px;
+    }
+   
+    
+</style>
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="content">
+        <h3>Dream Big <span> And</span> Grab Big</h3>
+        <p>More than 160+ reputed Companies reprsenting diverse sectors visit the campus for placement</p>
+        <h2 id="button">Our Placement Records</h2>
+        <img src="https://www.nmit.ac.in/img/place/Placement2.jpg" alt="" id="records">
+    </div>
+
+</section>
+
+
+
+<!-- home section ends -->
+
+
+<!-- features section starts  -->
+
+<section class="features" id="features">
+
+    <h1 class="heading"> our <span>features</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="https://donboscobangalore.education/img/sections/slider/placements1.jpg" alt="">
+            <h3> Career Guidance</h3>
+            <p>We Have a Career Guidance Center to encourage students to be Succesful in thier Future Upcomes</p>
+            <a href="https://www.nmit.ac.in/placement.php#Why-Recruit" class="btn">read more</a>
+        </div>
+
+        <div class="box">
+            <img src="https://cgpcareeravenues.in/wp-content/uploads/2021/05/placement-training-course.png" alt="">
+            <h3>Placement Training </h3>
+            <p>We provide the free Tranning for Students of Nmit Banglore</p>
+            <a href="https://www.nmit.ac.in/placement.php#Training-and-Placement" class="btn">read more</a>
+        </div>
+
+        <div class="box">
+            <img src="https://th.bing.com/th/id/OIP.NeEmIh3NBZ7MoBiM_FjYKgHaEK?pid=ImgDet&rs=1" alt="">
+            <h3>Paid Skill Courses </h3>
+            <p>We even provide paid courses for students from coursera to enhance thier skills</p>
+            <a href="https://www.nmit.ac.in/placement.php#Institute-Collaboration" class="btn">read more</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- features section ends -->
+
+<!-- products section starts  -->
+
+{% load static %}  
+<script type="text/javascript" src="{% static "/js/script.js" %}"></script>
+ 
+
+<section class="products" id="products">
+
+    <h1 class="heading"> our <span>Valued Recruiters </span> </h1>
+
+    <div class="swiper product-slider">
+<div class="new">
+           {% for product in products %}
+           <div id={{product.id}}>
+            <div class="box" >
+               <img class="companies" src="{{product.image.url}}" alt="company">
+                <h3>{{product.name}}</h3>
+                <div class="price">{{product.cgpa}} CGPA Cutoff </div>
+                <div class="price">{{product.description}} </div>
+                {% if product|is_in_cart:request.session.cart %}
+         
+    							<form action="/#{{product.id}}" class="col-2 " method="post">
+    								{% csrf_token %}
+    								<input hidden type="text" name='product' value='{{product.id}}'>
+    								<input hidden type="text" name='remove' value='True'>
+
+                                    
+    							</form>
+    	
+    							<form action="/#{{product.id}}" class="col-2 " method="post">
+    								{% csrf_token %}
+    								<input hidden type="text" name='product' value='{{product.id}}'>
+
+                                   
+    							</form>
+                             
+    				
+                {% else %}
+                <form action="/#{{product.id}}" method="POST" class="btn">
+    							{% csrf_token %}
+    							<input hidden type="text" name='product' value='{{product.id}}'>
+                      <input type="submit" class="float-right btn  form-control"
+    								value="APPLY NOW">
+    						</form>
+    						{% endif %}
+
+                            
+                           
+            </div>
+        </div>
+         {% endfor %}
+      </div>
+      </div>
+</section>
+
+<!-- products section ends -->
+
+<!-- categories section starts  -->
+
+<section class="categories" id="categories">
+
+    <h1 class="heading"> Companies <span>categories</span> </h1>
+
+    <div class="box-container">
+        {% for category in categories %}
+        <div class="box">
+            <img src="image/cat-1.png" alt="">
+            <h3>{{category.name}}</h3>
+           
+            <a href="/?category={{category.id}}" class="btn">View Companies</a>
+        </div>
+          {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- categories section ends -->
+
+<!-- review section starts  -->
+
+<!-- review section ends -->
+
+<!-- blogs section starts  -->
+
+<!-- blogs section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3> Nmit Placement Portal  </h3>
+            <p>Yelahanka Banglore</p>
+            <div class="share">
+                <a href="https://www.facebook.com/NMITBangalore/" class="fab fa-facebook-f"></a>
+                <a href="https://twitter.com/NMITBangalore" class="fab fa-twitter"></a>
+                <a href="https://instagram.com/nmitbangalore?igshid=MDM4ZDc5MmU=" class="fab fa-instagram"></a>
+                <a href="https://www.linkedin.com/school/nmit-bangalore/" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#" class="links"> <i class="fas fa-phone"></i> 7483065396 </a>
+   
+            <a href="#" class="links"> <i class="fas fa-envelope"></i>nittemeenakshi@gmail.com</a>
+            <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i>Yelahanka Banglore </a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> features </a>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Companies </a>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> categories </a>
+           
+        </div>
+
+<!--        <div class="box">-->
+<!--            <h3>newsletter</h3>-->
+<!--            <p>subscribe for latest updates</p>-->
+<!--            <input type="email" placeholder="your email" class="email">-->
+<!--            <input type="submit" value="subscribe" class="btn">-->
+<!--            <img src="payment.png" class="payment-img" alt="">-->
+<!--        </div>-->
+
+    </div>
+
+    <div class="credit"> Website Maintained By<br><span> Placement Cell-Nmit</span><br><span> </span>
+     </div>
+    
+
+</section>
+{% endblock %}
+<!-- footer section ends -->
+<script>
+    function myFunction()
+    {
+alert("hello ");
+console.log("hello")
+    }
+</script>
